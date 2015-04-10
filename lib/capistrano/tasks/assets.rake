@@ -69,7 +69,7 @@ namespace :deploy do
 
           execute :mkdir, '-p', backup_path
           execute :cp,
-            release_path.join('public', fetch(:assets_prefix), 'manifest*.*'),
+            release_path.join('public', fetch(:assets_prefix), '.sprockets-manifest*.*'),
             backup_path
         end
       end
@@ -80,7 +80,7 @@ namespace :deploy do
         within release_path do
           source = release_path.join('assets_manifest_backup')
           target = capture(:ls, release_path.join('public', fetch(:assets_prefix),
-                                                  'manifest*')).strip
+                                                  '.sprockets-manifest*')).strip
           if test "[[ -f #{source} && -f #{target} ]]"
             execute :cp, source, target
           else
